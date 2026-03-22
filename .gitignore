@@ -1,0 +1,49 @@
+# Java class files
+*.class
+
+# Jar files
+*.jar
+
+# Package build directory
+target/
+bin/
+
+# Maven/Gradle build directories (if you use them)
+# For Maven:
+# pom.xml.tag
+# pom.xml.releaseBackup
+# pom.xml.versionsBackup
+# pom.xml.next
+# release.properties
+# dependency-reduced-pom.xml
+# buildNumber.properties
+# .mvn/timing.properties
+# For Gradle:
+# .gradle/
+# build/
+
+# IDE specific files
+.idea/             # IntelliJ IDEA files
+.project           # Eclipse project files
+.classpath         # Eclipse classpath files
+.settings/         # Eclipse settings directory
+*.iml              # IntelliJ IDEA module files
+.vscode/           # VS Code directory
+
+# Logs
+*.log
+logs/
+
+# Compiled native libraries (if applicable)
+*.dll
+*.so
+*.jnilib
+
+# Temporary files
+*~
+*.bak
+*.tmp
+temp/
+
+# Shell scripts
+*.sh
