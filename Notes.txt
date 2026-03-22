@@ -1,0 +1,12 @@
+Soham
+port = 8080
+
+End Points
+
+/login POST
+params - email, password
+url - http://localhost:8080/login
+req body - {"email": "a", "password": "a"}
+res - 200 OK 
+
+

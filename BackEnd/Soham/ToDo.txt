@@ -1,0 +1,5 @@
+User ,trip, dayplan,place, accomodation ,transport.
+
+/login, POST (email, password) 
+/signup
+
