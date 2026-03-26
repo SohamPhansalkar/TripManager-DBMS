@@ -220,6 +220,7 @@ public class AuthPage extends JFrame {
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(res -> {
                     if (res.statusCode() == 200) {
+                        System.out.println("Login using backend");
                         JOptionPane.showMessageDialog(this, successMsg);
                         if (successMsg.contains("Login")) {
                             SwingUtilities.invokeLater(() -> {

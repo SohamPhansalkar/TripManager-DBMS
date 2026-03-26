@@ -46,4 +46,4 @@ logs/
 temp/
 
 # Shell scripts
-*.sh
+run.sh

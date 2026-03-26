@@ -374,8 +374,8 @@ public class LandingPage extends JFrame {
         reviews.setOpaque(false);
         reviews.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0));
 
-        reviews.add(createReviewCard("Tanmay", "⭐⭐⭐⭐⭐", "TripManager transformed how I travel. The drag-and-drop itinerary builder saved me hours of planning!", new Color(0, 150, 136)));
-        reviews.add(createReviewCard("Soham", "⭐⭐⭐⭐⭐", "The interface is stunningly clean. I love how I can switch to dark mode at night while planning my Japan trip.", new Color(103, 58, 183)));
+        reviews.add(createReviewCard("Boi", "⭐⭐⭐⭐⭐", "TripManager transformed how I travel. The drag-and-drop itinerary builder saved me hours of planning!", new Color(0, 150, 136)));
+        reviews.add(createReviewCard("----", "⭐⭐⭐⭐⭐", "The interface is stunningly clean. I love how I can switch to dark mode at night while planning my Japan trip.", new Color(103, 58, 183)));
         reviews.add(createReviewCard("JiruBoy", "⭐⭐⭐⭐⭐", "Collaborating with my family for our summer vacation was so seamless. Highly recommended for group trips!", new Color(233, 30, 99)));
         reviews.add(createReviewCard("Artist", "⭐⭐⭐⭐⭐", "The aesthetics of this app are inspiring! It's like painting my own journey with a digital brush.", new Color(255, 152, 0)));
 
@@ -562,7 +562,6 @@ public class LandingPage extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         SwingUtilities.invokeLater(() -> {
             new LandingPage().setVisible(true);
         });
