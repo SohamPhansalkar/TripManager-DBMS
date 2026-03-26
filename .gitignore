@@ -47,3 +47,5 @@ temp/
 
 # Shell scripts
 run.sh
+*.iml
+.idea
