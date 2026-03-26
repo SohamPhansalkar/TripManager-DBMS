@@ -1,6 +1,0 @@
-User ,trip, dayplan,place, accomodation ,transport.
-
-/login, POST (email, password) done 
-/signup done
-
-next trip
