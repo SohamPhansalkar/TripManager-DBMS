@@ -1,5 +1,8 @@
 package BackEnd.Soham;
 
+import BackEnd.Soham.Trip.CreateTrip.CreateTripController;
+import BackEnd.Soham.Trip.GetTrip.ByEmail.TripByEmailController;
+import BackEnd.Soham.Trip.GetTrip.ById.TripByIdController;
 import BackEnd.Soham.User.LogIn.LogInController;
 import BackEnd.Soham.User.SignUp.SignUpController;
 
@@ -14,6 +17,12 @@ public class Main {
         server.createContext("/login", new LogInController());
 
         server.createContext("/signup", new SignUpController());
+
+        server.createContext("/createtrip", new CreateTripController());
+
+        server.createContext("/gettripbyid", new TripByIdController());
+
+        server.createContext("/gettripsbyemail", new TripByEmailController());
 
         System.out.println("Server started on http://localhost:8080");
         server.start();

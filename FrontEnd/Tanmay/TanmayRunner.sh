@@ -2,7 +2,7 @@
 
 # Compile the project
 echo "Compiling..."
-javac LandingPage.java AuthPage.java Dashboard.java
+javac FrontEnd/Tanmay/LandingPage.java FrontEnd/Tanmay/AuthPage.java FrontEnd/Tanmay/Dashboard.java
 
 # If compilation was successful, run it
 if [ $? -eq 0 ]; then

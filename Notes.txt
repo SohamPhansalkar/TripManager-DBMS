@@ -16,8 +16,60 @@ req body -
 }
 res - 200 OK
 
+
 /login POST
 params - email, password (order imp)
 url - http://localhost:8080/login
 req body - {"email": "a", "password": "a"}
 res - 200 OK 
+
+
+/createtrip POST 
+params - creatorEmail, destination, budget, startDate, endDate
+url - http://localhost:8080/createtrip
+req body - 
+{
+    "creatorEmail": "a",
+    "destination": "konkan",
+    "budget" : "15000",
+    "startDate": "2025-04-02",
+    "endDate": "2025-04-06-03-22"
+}
+res - 201 created
+
+
+/gettripbyid POST
+params - trpID
+url - http://localhost:8080/gettripbyid
+req body - 
+{
+    "tripID": "1"
+}
+
+res - 
+{
+    "creatorEmail": "a",
+    "destination": "Mumbai",
+    "budget": 20000,
+    "startDate": "2025-04-01",
+    "endDate": "2025-04-05"
+}
+200 OK
+
+
+/gettripsbyemail POST
+params - trpID
+url - http://localhost:8080/gettripsbyemail
+req body - 
+{
+    "creatorEmail": "a"
+}
+
+res - 
+{
+    "tripIDs": [
+        1,
+        18
+    ]
+}
+200 OK
