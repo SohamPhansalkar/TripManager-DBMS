@@ -4,3 +4,5 @@ User ,trip, dayplan,place, accomodation ,transport.
 /signup done
 
 next trip
+create trip
+get trip (trip id)
