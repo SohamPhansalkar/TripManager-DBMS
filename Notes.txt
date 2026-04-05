@@ -55,3 +55,21 @@ res -
     "endDate": "2025-04-05"
 }
 200 OK
+
+
+/gettripsbyemail POST
+params - trpID
+url - http://localhost:8080/gettripsbyemail
+req body - 
+{
+    "creatorEmail": "a"
+}
+
+res - 
+{
+    "tripIDs": [
+        1,
+        18
+    ]
+}
+200 OK
