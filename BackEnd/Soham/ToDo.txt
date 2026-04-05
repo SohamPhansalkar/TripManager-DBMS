@@ -5,4 +5,6 @@ User ,trip, dayplan,place, accomodation ,transport.
 
 next trip
 create trip
+
 get trip (trip id)
+get trips by user emal
