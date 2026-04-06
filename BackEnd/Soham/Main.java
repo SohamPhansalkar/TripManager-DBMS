@@ -1,5 +1,8 @@
 package BackEnd.Soham;
 
+import BackEnd.Soham.Day.CreateDay.CreateDayController;
+import BackEnd.Soham.Day.GetDay.ByDayId.DayByDayIDController;
+import BackEnd.Soham.Day.GetDay.ByTripId.DayByTripIdController;
 import BackEnd.Soham.Trip.CreateTrip.CreateTripController;
 import BackEnd.Soham.Trip.GetTrip.ByEmail.TripByEmailController;
 import BackEnd.Soham.Trip.GetTrip.ById.TripByIdController;
@@ -23,6 +26,12 @@ public class Main {
         server.createContext("/gettripbyid", new TripByIdController());
 
         server.createContext("/gettripsbyemail", new TripByEmailController());
+
+        server.createContext("/createday", new CreateDayController());
+
+        server.createContext("/getdaybydayid", new DayByDayIDController());
+
+        server.createContext("/getdaysbytripid", new DayByTripIdController());
 
         System.out.println("Server started on http://localhost:8080");
         server.start();

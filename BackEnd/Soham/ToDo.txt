@@ -1,10 +1,14 @@
-User ,trip, dayplan,place, accomodation ,transport.
+User ,trip, dayplan (event) ,place, accomodation ,transport.
 
 /login, POST (email, password) done 
 /signup done
 
 next trip
 create trip
-
 get trip (trip id)
-get trips by user emal
+get trips by user email
+
+day
+crate day (tripID)
+get day by day id
+get days by tripID

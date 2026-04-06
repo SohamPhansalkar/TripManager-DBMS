@@ -73,3 +73,58 @@ res -
     ]
 }
 200 OK
+
+
+/createday POST
+params - tripID, date
+url - http://localhost:8080/createday
+req body-
+{
+    "tripID": "1",
+    "date" : "2026-04-07"
+}
+
+res - 201 created
+
+
+/getdaysbytripid POST
+params - dayID
+url - http://localhost:8080/getdaysbytripid
+req body
+{
+    "tripID": "1",
+}
+res body - 
+{
+    "days": [
+        {
+            "dayID": 19,
+            "date": "2026-04-07"
+        },
+        {
+            "dayID": 16,
+            "date": "2025-04-02"
+        },
+        {
+            "dayID": 1,
+            "date": "2025-04-01"
+        }
+    ]
+}
+200 OK
+
+
+/getdaybydayid POST
+params - dayID
+url - http://localhost:8080/getdaybydayid
+req body
+{
+    "dayID": "1"
+}
+
+res body 
+{
+    "tripID": 1,
+    "date": "2025-04-01"
+}
+200 OK 
