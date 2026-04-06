@@ -2,7 +2,7 @@
 
 # Compile the project
 echo "Compiling..."
-javac /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/LandingPage.java /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/AuthPage.java /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/Dashboard.java
+javac /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/LandingPage.java /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/AuthPage.java /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/Dashboard.java /Users/tanmay/repos/TripManager-DBMS/FrontEnd/Tanmay/LandingPage.java
 
 # If compilation was successful, run it
 if [ $? -eq 0 ]; then
