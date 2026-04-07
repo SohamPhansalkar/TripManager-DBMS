@@ -128,3 +128,80 @@ res body
     "date": "2025-04-01"
 }
 200 OK 
+
+
+/createevent POST
+params - dayID, tripID, time, type, description, link
+url - http://localhost:8080/createevent
+req body
+{
+    "dayID" : "1",
+    "tripID" : "1", 
+    "time" : "10:30:00", 
+    "type" : "Place", 
+    "description" : "Imagicaa", 
+    "link" : "imagicaa.com" 
+}
+res body 
+201 created
+
+/geteventsbydayid POST
+params - dayID
+url - http://localhost:8080/geteventsbydayid
+req body
+{
+    "dayID" : "1"
+}
+res body
+{
+    "events": [
+        {
+            "eventID": 3,
+            "dayID": 1,
+            "tripID": 3,
+            "time": "12:00:00",
+            "type": "Accommodation",
+            "description": "Hotel stay",
+            "link": null
+        },
+        {
+            "eventID": 2,
+            "dayID": 1,
+            "tripID": 2,
+            "time": "11:00:00",
+            "type": "Place",
+            "description": "Visit hill",
+            "link": null
+        },
+        {
+            "eventID": 1,
+            "dayID": 1,
+            "tripID": 1,
+            "time": "10:00:00",
+            "type": "Transport",
+            "description": "Bus travel",
+            "link": null
+        }
+    ]
+}
+200 OK
+
+
+/geteventbyeventid POST
+params - eventID
+url - http://localhost:8080/geteventbyeventid
+req body
+{
+    "eventID" : "17"
+}
+res body
+{
+    "eventID": 17,
+    "dayID": 1,
+    "tripID": 1,
+    "time": "10:30:00",
+    "type": "Place",
+    "description": "Imagicaa",
+    "link": "imagicaa.com"
+}
+200 OK

@@ -12,3 +12,9 @@ day
 crate day (tripID)
 get day by day id
 get days by tripID
+
+event 
+create event (dayID, tripID, time, type, description, link)
+get event by eventID
+get event by dayID
+

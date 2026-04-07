@@ -3,6 +3,9 @@ package BackEnd.Soham;
 import BackEnd.Soham.Day.CreateDay.CreateDayController;
 import BackEnd.Soham.Day.GetDay.ByDayId.DayByDayIDController;
 import BackEnd.Soham.Day.GetDay.ByTripId.DayByTripIdController;
+import BackEnd.Soham.Event.CreateEvent.CreateEventController;
+import BackEnd.Soham.Event.GetEvent.ByDayId.EventByDayIdController;
+import BackEnd.Soham.Event.GetEvent.ByEventId.EventByEventIdController;
 import BackEnd.Soham.Trip.CreateTrip.CreateTripController;
 import BackEnd.Soham.Trip.GetTrip.ByEmail.TripByEmailController;
 import BackEnd.Soham.Trip.GetTrip.ById.TripByIdController;
@@ -11,7 +14,7 @@ import BackEnd.Soham.User.SignUp.SignUpController;
 
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
-import java.net.InetSocketAddress;
+import java.net.InetSocketAddress; 
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -32,6 +35,12 @@ public class Main {
         server.createContext("/getdaybydayid", new DayByDayIDController());
 
         server.createContext("/getdaysbytripid", new DayByTripIdController());
+
+        server.createContext("/createevent", new CreateEventController());
+
+        server.createContext("/geteventsbydayid", new EventByDayIdController());
+
+        server.createContext("/geteventbyeventid", new EventByEventIdController());
 
         System.out.println("Server started on http://localhost:8080");
         server.start();
