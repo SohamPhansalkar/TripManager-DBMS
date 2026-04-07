@@ -11,7 +11,7 @@ import java.util.List;
 import BackEnd.Talib.Reviews.GetReviewsByPlace.GetReviewsByPlaceRepository.ReviewRecord;
 
 public class GetReviewsByPlaceController implements HttpHandler {
-    private final GetReviewsByPlaceRepository repository = new GetReviewsByPlaceRepository();
+    private final GetReviewsByPlaceService service = new GetReviewsByPlaceService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -27,7 +27,7 @@ public class GetReviewsByPlaceController implements HttpHandler {
                 }
 
                 int placeID = Integer.parseInt(placeIdStr);
-                List<ReviewRecord> reviews = repository.getReviewsByPlace(placeID);
+                List<ReviewRecord> reviews = service.getReviewsByPlace(placeID);
                 
                 StringBuilder sb = new StringBuilder("[");
                 for (int i = 0; i < reviews.size(); i++) {

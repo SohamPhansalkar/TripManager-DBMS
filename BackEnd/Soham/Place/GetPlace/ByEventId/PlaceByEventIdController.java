@@ -11,7 +11,7 @@ import java.util.List;
 import BackEnd.Soham.Place.GetPlace.ByEventId.PlaceByEventIdRepository.PlaceRecord;
 
 public class PlaceByEventIdController implements HttpHandler {
-    private final PlaceByEventIdRepository repository = new PlaceByEventIdRepository();
+    private final PlaceByEventIdService service = new PlaceByEventIdService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -35,7 +35,7 @@ public class PlaceByEventIdController implements HttpHandler {
                     return;
                 }
 
-                List<PlaceRecord> places = repository.findByEventId(eventID);
+                List<PlaceRecord> places = service.findByEventId(eventID);
 
                 StringBuilder sb = new StringBuilder();
                 sb.append("{\"places\":[");

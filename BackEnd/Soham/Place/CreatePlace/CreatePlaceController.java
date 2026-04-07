@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreatePlaceController implements HttpHandler {
-    private final CreatePlaceRepository repository = new CreatePlaceRepository();
+    private final CreatePlaceService service = new CreatePlaceService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -39,7 +39,7 @@ public class CreatePlaceController implements HttpHandler {
                     return;
                 }
 
-                boolean inserted = repository.insertPlace(eventID, name, placetype, seasonalAvailability, street, city, country);
+                boolean inserted = service.insertPlace(eventID, name, placetype, seasonalAvailability, street, city, country);
                 if (inserted) {
                     sendResponse(exchange, "Place Created", 201);
                 } else {

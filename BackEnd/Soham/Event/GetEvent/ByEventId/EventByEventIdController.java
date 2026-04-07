@@ -10,7 +10,7 @@ import java.util.Map;
 import BackEnd.Soham.Event.GetEvent.ByEventId.EventByEventIdRepository.EventRecord;
 
 public class EventByEventIdController implements HttpHandler {
-	private final EventByEventIdRepository repository = new EventByEventIdRepository();
+	private final EventByEventIdService service = new EventByEventIdService();
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
@@ -34,7 +34,7 @@ public class EventByEventIdController implements HttpHandler {
 					return;
 				}
 
-				EventRecord er = repository.findByEventId(eventID);
+				EventRecord er = service.findByEventId(eventID);
 				if (er == null) {
 					sendResponse(exchange, "Not Found", 404);
 					return;

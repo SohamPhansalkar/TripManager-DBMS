@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateDayController implements HttpHandler {
-    private final CreateDayRepository repository = new CreateDayRepository();
+    private final CreateDayService service = new CreateDayService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -34,7 +34,7 @@ public class CreateDayController implements HttpHandler {
                     return;
                 }
 
-                boolean inserted = repository.insertDay(tripID, date);
+                boolean inserted = service.insertDay(tripID, date);
                 if (inserted) {
                     sendResponse(exchange, "Day Created", 201);
                 } else {

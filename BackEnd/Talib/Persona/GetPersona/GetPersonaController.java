@@ -10,7 +10,7 @@ import BackEnd.Talib.Utils.InputValidator;
 import BackEnd.Talib.Persona.GetPersona.GetPersonaRepository.PersonaRecord;
 
 public class GetPersonaController implements HttpHandler {
-    private final GetPersonaRepository repository = new GetPersonaRepository();
+    private final GetPersonaService service = new GetPersonaService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -26,7 +26,7 @@ public class GetPersonaController implements HttpHandler {
                     sendResponse(exchange, "Missing email", 400); return;
                 }
 
-                PersonaRecord persona = repository.getPersona(email);
+                PersonaRecord persona = service.getPersona(email);
                 if (persona != null) {
                     String json = "{" +
                         "\"personaType\":\"" + escape(persona.type) + "\"," +

@@ -9,7 +9,7 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class CreateReviewController implements HttpHandler {
-    private final CreateReviewRepository repository = new CreateReviewRepository();
+    private final CreateReviewService service = new CreateReviewService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -37,7 +37,7 @@ public class CreateReviewController implements HttpHandler {
                 int rating = Integer.parseInt(ratingStr);
                 InputValidator.validateRating(rating);
 
-                repository.createReview(email, placeID, accID, rating, comment, reviewDate);
+                service.createReview(email, placeID, accID, rating, comment, reviewDate);
                 sendJsonResponse(exchange, "{\"message\":\"Review created successfully\"}", 201);
             } catch (IllegalArgumentException e) {
                 sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);

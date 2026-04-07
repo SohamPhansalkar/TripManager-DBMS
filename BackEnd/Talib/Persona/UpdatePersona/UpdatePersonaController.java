@@ -8,13 +8,13 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class UpdatePersonaController implements HttpHandler {
-    private final UpdatePersonaRepository repository = new UpdatePersonaRepository();
+    private final UpdatePersonaService service = new UpdatePersonaService();
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
             try {
                 Map<String, String> params = parseJson(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
-                repository.executeUpdate(params.get("email"), params.get("personaType"));
+                service.executeUpdate(params.get("email"), params.get("personaType"));
                 sendJsonResponse(exchange, "{\"message\":\"Persona updated\"}", 200);
             } catch (IllegalArgumentException e) {
                 sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);

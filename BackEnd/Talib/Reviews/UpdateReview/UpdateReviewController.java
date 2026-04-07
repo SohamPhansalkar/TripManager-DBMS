@@ -8,7 +8,7 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class UpdateReviewController implements HttpHandler {
-    private final UpdateReviewRepository repository = new UpdateReviewRepository();
+    private final UpdateReviewService service = new UpdateReviewService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -21,7 +21,7 @@ public class UpdateReviewController implements HttpHandler {
                 int placeID = Integer.parseInt(params.get("placeID"));
                 int rating = Integer.parseInt(params.get("rating"));
                 InputValidator.validateRating(rating);
-                repository.executeUpdate(params.get("userEmail"), placeID, rating, params.get("comment"));
+                service.executeUpdate(params.get("userEmail"), placeID, rating, params.get("comment"));
                 sendJsonResponse(exchange, "{\"message\":\"Review updated\"}", 200);
             } catch (Exception e) {
                 sendResponse(exchange, "Server error: " + e.getMessage(), 500);

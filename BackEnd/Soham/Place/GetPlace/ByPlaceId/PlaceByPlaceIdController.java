@@ -10,7 +10,7 @@ import java.util.Map;
 import BackEnd.Soham.Place.GetPlace.ByPlaceId.PlaceByPlaceIdRepository.PlaceRecord;
 
 public class PlaceByPlaceIdController implements HttpHandler {
-    private final PlaceByPlaceIdRepository repository = new PlaceByPlaceIdRepository();
+    private final PlaceByPlaceIdService service = new PlaceByPlaceIdService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -34,7 +34,7 @@ public class PlaceByPlaceIdController implements HttpHandler {
                     return;
                 }
 
-                PlaceRecord p = repository.findByPlaceId(placeID);
+                PlaceRecord p = service.findByPlaceId(placeID);
                 if (p == null) {
                     sendResponse(exchange, "Not Found", 404);
                     return;

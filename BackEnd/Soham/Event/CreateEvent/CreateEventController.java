@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateEventController implements HttpHandler {
-	private final CreateEventRepository repository = new CreateEventRepository();
+	private final CreateEventService service = new CreateEventService();
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
@@ -39,7 +39,7 @@ public class CreateEventController implements HttpHandler {
 					return;
 				}
 
-				boolean inserted = repository.insertEvent(dayID, tripID, time, type, description, link);
+				boolean inserted = service.insertEvent(dayID, tripID, time, type, description, link);
 				if (inserted) {
 					sendResponse(exchange, "Event Created", 201);
 				} else {

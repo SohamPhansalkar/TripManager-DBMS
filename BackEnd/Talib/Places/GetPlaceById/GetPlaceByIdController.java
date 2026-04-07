@@ -11,7 +11,7 @@ import BackEnd.Talib.Utils.InputValidator;
 import BackEnd.Talib.Places.GetPlaceById.GetPlaceByIdRepository.PlaceDetailRecord;
 
 public class GetPlaceByIdController implements HttpHandler {
-    private final GetPlaceByIdRepository repository = new GetPlaceByIdRepository();
+    private final GetPlaceByIdService service = new GetPlaceByIdService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -27,7 +27,7 @@ public class GetPlaceByIdController implements HttpHandler {
                 }
 
                 int placeID = Integer.parseInt(idStr);
-                PlaceDetailRecord place = repository.getPlaceById(placeID);
+                PlaceDetailRecord place = service.getPlaceById(placeID);
                 if (place != null) {
                     StringBuilder json = new StringBuilder("{");
                     json.append("\"placeID\":").append(place.placeID).append(",");

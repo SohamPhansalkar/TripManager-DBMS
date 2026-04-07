@@ -10,12 +10,12 @@ import java.util.List;
 import BackEnd.Talib.Places.GetAllPlaces.GetAllPlacesRepository.PlaceRecord;
 
 public class GetAllPlacesController implements HttpHandler {
-    private final GetAllPlacesRepository repository = new GetAllPlacesRepository();
+    private final GetAllPlacesService service = new GetAllPlacesService();
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
             try {
-                List<PlaceRecord> places = repository.execute();
+                List<PlaceRecord> places = service.execute();
                 StringBuilder sb = new StringBuilder();
                 sb.append("[");
                 for (int i = 0; i < places.size(); i++) {

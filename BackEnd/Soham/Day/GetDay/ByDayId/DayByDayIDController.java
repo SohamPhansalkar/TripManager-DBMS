@@ -10,7 +10,7 @@ import java.util.Map;
 import BackEnd.Soham.Day.GetDay.ByDayId.DayByDayIDRepository.DayRecord;
 
 public class DayByDayIDController implements HttpHandler {
-	private final DayByDayIDRepository repository = new DayByDayIDRepository();
+	private final DayByDayIDService service = new DayByDayIDService();
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
@@ -34,7 +34,7 @@ public class DayByDayIDController implements HttpHandler {
 					return;
 				}
 
-				DayRecord rec = repository.findById(dayID);
+				DayRecord rec = service.findById(dayID);
 				if (rec == null) {
 					sendResponse(exchange, "Not Found", 404);
 					return;

@@ -11,7 +11,7 @@ import java.util.List;
 import BackEnd.Soham.Day.GetDay.ByTripId.DayByTripIdRepository.DayRecord;
 
 public class DayByTripIdController implements HttpHandler {
-	private final DayByTripIdRepository repository = new DayByTripIdRepository();
+	private final DayByTripIdService service = new DayByTripIdService();
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
@@ -35,7 +35,7 @@ public class DayByTripIdController implements HttpHandler {
 					return;
 				}
 
-				List<DayRecord> days = repository.findByTripId(tripID);
+				List<DayRecord> days = service.findByTripId(tripID);
 
 				StringBuilder sb = new StringBuilder();
 				sb.append("{\"days\":[");

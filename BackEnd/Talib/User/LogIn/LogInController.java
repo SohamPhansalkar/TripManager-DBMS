@@ -9,7 +9,7 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class LogInController implements HttpHandler {
-    private final LogInRepository repository = new LogInRepository();
+    private final LogInService service = new LogInService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -28,7 +28,7 @@ public class LogInController implements HttpHandler {
                     return;
                 }
 
-                boolean isValid = repository.authenticateUser(email, password);
+                boolean isValid = service.authenticateUser(email, password);
 
                 if (isValid) {
                     sendJsonResponse(exchange, "{\"message\":\"Login Successful\"}", 200);

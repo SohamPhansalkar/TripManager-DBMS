@@ -11,7 +11,7 @@ import java.util.List;
 import BackEnd.Soham.Event.GetEvent.ByDayId.EventByDayIdRepository.EventRecord;
 
 public class EventByDayIdController implements HttpHandler {
-	private final EventByDayIdRepository repository = new EventByDayIdRepository();
+	private final EventByDayIdService service = new EventByDayIdService();
 
 	@Override
 	public void handle(HttpExchange exchange) throws IOException {
@@ -35,7 +35,7 @@ public class EventByDayIdController implements HttpHandler {
 					return;
 				}
 
-				List<EventRecord> events = repository.findByDayId(dayID);
+				List<EventRecord> events = service.findByDayId(dayID);
 
 				StringBuilder sb = new StringBuilder();
 				sb.append("{\"events\":[");

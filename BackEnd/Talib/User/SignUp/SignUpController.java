@@ -9,7 +9,7 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class SignUpController implements HttpHandler {
-    private final SignUpRepository repository = new SignUpRepository();
+    private final SignUpService service = new SignUpService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -33,7 +33,7 @@ public class SignUpController implements HttpHandler {
                     return;
                 }
 
-                boolean success = repository.signUpuser(email, password, first_name, last_name, dob);
+                boolean success = service.signUpuser(email, password, first_name, last_name, dob);
 
                 if (success) {
                     sendJsonResponse(exchange, "{\"message\":\"Sign up Successful\"}", 200);

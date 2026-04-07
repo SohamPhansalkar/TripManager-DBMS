@@ -8,7 +8,7 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class DeleteReviewController implements HttpHandler {
-    private final DeleteReviewRepository repository = new DeleteReviewRepository();
+    private final DeleteReviewService service = new DeleteReviewService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -18,7 +18,7 @@ public class DeleteReviewController implements HttpHandler {
                 String body = new String(is.readAllBytes(), StandardCharsets.UTF_8);
                 Map<String, String> params = parseJson(body);
                 int placeID = Integer.parseInt(params.get("placeID"));
-                repository.executeDelete(params.get("userEmail"), placeID);
+                service.executeDelete(params.get("userEmail"), placeID);
                 sendJsonResponse(exchange, "{\"message\":\"Review deleted\"}", 200);
             } catch (IllegalArgumentException e) {
                 sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);

@@ -8,13 +8,13 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class DeletePersonaController implements HttpHandler {
-    private final DeletePersonaRepository repository = new DeletePersonaRepository();
+    private final DeletePersonaService service = new DeletePersonaService();
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equalsIgnoreCase(exchange.getRequestMethod())) {
             try {
                 Map<String, String> params = parseJson(new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8));
-                repository.executeDelete(params.get("email"));
+                service.executeDelete(params.get("email"));
                 sendJsonResponse(exchange, "{\"message\":\"Persona deleted\"}", 200);
             } catch (IllegalArgumentException e) {
                 sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);

@@ -9,7 +9,7 @@ import java.util.Map;
 import BackEnd.Talib.Utils.InputValidator;
 
 public class CreatePersonaController implements HttpHandler {
-    private final CreatePersonaRepository repository = new CreatePersonaRepository();
+    private final CreatePersonaService service = new CreatePersonaService();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -52,7 +52,7 @@ public class CreatePersonaController implements HttpHandler {
                     throw new IllegalArgumentException("email and personaType are required");
                 }
 
-                repository.createPersona(email, type, dietary, bucketList, activities, riskLevel);
+                service.createPersona(email, type, dietary, bucketList, activities, riskLevel);
                 sendJsonResponse(exchange, "{\"message\": \"Persona created successfully\"}", 201);
             } catch (IllegalArgumentException e) {
                 sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);
