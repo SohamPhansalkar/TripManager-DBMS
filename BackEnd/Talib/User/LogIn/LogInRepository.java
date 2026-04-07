@@ -1,34 +1,24 @@
 package BackEnd.Talib.User.LogIn;
 
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import BackEnd.Talib.DBConnection;
-import BackEnd.Talib.User.UserEntity;
 
 public class LogInRepository {
-
-    public UserEntity findByEmail(String email) {
-        String query = "SELECT * FROM user WHERE email = ?";
+    public boolean authenticateUser(String email, String password) {
+        String query = "SELECT * FROM user WHERE email = ? AND password = ?";
         DBConnection DBC = new DBConnection();
-        
         try (Connection conn = DBC.DataBaseConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            
             stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new UserEntity(
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("first_name"),
-                    rs.getString("last_name"),
-                    rs.getString("dob")
-                );
+            stmt.setString(2, password);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 }

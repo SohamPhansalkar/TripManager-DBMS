@@ -19,24 +19,17 @@ public class CreatePersonaRepository {
             if ("foodie".equalsIgnoreCase(type)) {
                 String q = "INSERT INTO foodie (email, dietaryPreference) VALUES (?, ?) ON DUPLICATE KEY UPDATE dietaryPreference=VALUES(dietaryPreference)";
                 try (PreparedStatement ps = conn.prepareStatement(q)) { 
-                    ps.setString(1, email); 
-                    ps.setString(2, dietary); 
-                    ps.executeUpdate(); 
+                    ps.setString(1, email); ps.setString(2, dietary); ps.executeUpdate(); 
                 }
             } else if ("explorer".equalsIgnoreCase(type)) {
                 String q = "INSERT INTO explorer (email, bucketList) VALUES (?, ?) ON DUPLICATE KEY UPDATE bucketList=VALUES(bucketList)";
                 try (PreparedStatement ps = conn.prepareStatement(q)) { 
-                    ps.setString(1, email); 
-                    ps.setString(2, bucketList); 
-                    ps.executeUpdate(); 
+                    ps.setString(1, email); ps.setString(2, bucketList); ps.executeUpdate(); 
                 }
             } else if ("adventurer".equalsIgnoreCase(type)) {
                 String q = "INSERT INTO adventurer (email, activities, riskLevel) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE activities=VALUES(activities), riskLevel=VALUES(riskLevel)";
                 try (PreparedStatement ps = conn.prepareStatement(q)) { 
-                    ps.setString(1, email); 
-                    ps.setString(2, activities); 
-                    ps.setString(3, riskLevel); 
-                    ps.executeUpdate(); 
+                    ps.setString(1, email); ps.setString(2, activities); ps.setString(3, riskLevel); ps.executeUpdate(); 
                 }
             }
         }

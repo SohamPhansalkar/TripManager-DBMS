@@ -1,25 +1,37 @@
 package BackEnd.Talib.Places.GetAllPlaces;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import BackEnd.Talib.DBConnection;
 
 public class GetAllPlacesRepository {
-    public String execute() throws Exception {
-        String query = "SELECT p.*, ts.popularityScore, ts.recommendedDuration, fs.priceRange, fs.mustTryDishes " +
-                       "FROM place p LEFT JOIN touristSpot ts ON p.placeID = ts.placeID LEFT JOIN foodSpot fs ON p.placeID = fs.placeID";
-        
+    public static class PlaceRecord {
+        public final int placeID;
+        public final String popularityScore;
+        public final String priceRange;
+
+        public PlaceRecord(int placeID, String popularityScore, String priceRange) {
+            this.placeID = placeID;
+            this.popularityScore = popularityScore;
+            this.priceRange = priceRange;
+        }
+    }
+
+    public List<PlaceRecord> execute() throws Exception {
+        String query = "SELECT p.placeID, ts.popularityScore, fs.priceRange FROM place p LEFT JOIN touristSpot ts ON p.placeID = ts.placeID LEFT JOIN foodSpot fs ON p.placeID = fs.placeID";
         DBConnection DBC = new DBConnection();
         try (Connection conn = DBC.DataBaseConnection();
              PreparedStatement ps = conn.prepareStatement(query);
              ResultSet rs = ps.executeQuery()) {
-            StringBuilder json = new StringBuilder("[");
+            List<PlaceRecord> places = new ArrayList<>();
             while (rs.next()) {
-                if (json.length() > 1) json.append(",");
-                json.append("{").append("\"placeID\":").append(rs.getInt("placeID")).append(",")
-                    .append("\"popularityScore\":").append(rs.getObject("popularityScore")).append(",")
-                    .append("\"priceRange\":\"").append(rs.getString("priceRange")).append("\"").append("}");
+                String popScore = rs.getObject("popularityScore") == null ? null : String.valueOf(rs.getObject("popularityScore"));
+                places.add(new PlaceRecord(rs.getInt("placeID"), popScore, rs.getString("priceRange")));
             }
-            json.append("]");
-            return json.toString();
+            return places;
         }
     }
 }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignUpController implements HttpHandler {
-    private final SignUpService service = new SignUpService();
+    private final SignUpRepository repository = new SignUpRepository();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -24,32 +24,38 @@ public class SignUpController implements HttpHandler {
                 String last_name = params.get("last_name");
                 String dob = params.get("dob");
 
-                if (email == null || password == null || first_name == null || last_name == null | dob == null) {
-                    sendResponse(exchange, "{\"error\": \"Fields missing\"}", 400);
+                if (email == null || password == null || first_name == null || last_name == null || dob == null) {
+                    sendResponse(exchange, "Fields missing", 400);
                     return;
                 }
 
-                boolean success = service.verifySignUp(email, password, first_name, last_name, dob);
+                boolean success = repository.signUpuser(email, password, first_name, last_name, dob);
 
                 if (success) {
-                    sendResponse(exchange, "{\"message\": \"Sign up Successful\"}", 200);
+                    sendJsonResponse(exchange, "{\"message\":\"Sign up Successful\"}", 200);
                 } else {
-                    sendResponse(exchange, "{\"error\": \"Unauthorized or error\"}", 401);
+                    sendResponse(exchange, "Unauthorized", 401);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                sendResponse(exchange, "{\"error\": \"Invalid request\"}", 400);
+                sendResponse(exchange, "Invalid request", 400);
             }
         } else {
-            sendResponse(exchange, "{\"error\": \"Method not allowed\"}", 405);
+            sendResponse(exchange, "Method not allowed", 405);
         }
     }
 
     private void sendResponse(HttpExchange exchange, String response, int statusCode) throws IOException {
-        exchange.getResponseHeaders().set("Content-Type", "application/json");
-        exchange.sendResponseHeaders(statusCode, response.length());
+        exchange.sendResponseHeaders(statusCode, response.getBytes(StandardCharsets.UTF_8).length);
         try (OutputStream os = exchange.getResponseBody()) {
-            os.write(response.getBytes());
+            os.write(response.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    private void sendJsonResponse(HttpExchange exchange, String json, int statusCode) throws IOException {
+        exchange.getResponseHeaders().add("Content-Type", "application/json; charset=utf-8");
+        exchange.sendResponseHeaders(statusCode, json.getBytes(StandardCharsets.UTF_8).length);
+        try (OutputStream os = exchange.getResponseBody()) {
+            os.write(json.getBytes(StandardCharsets.UTF_8));
         }
     }
 
@@ -68,5 +74,10 @@ public class SignUpController implements HttpHandler {
             }
         }
         return result;
+    }
+
+    private String escape(String s) {
+        if (s == null) return "";
+        return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
     }
 }

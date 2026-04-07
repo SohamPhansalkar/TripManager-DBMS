@@ -3,11 +3,28 @@ package BackEnd.Talib.Places.GetPlaceById;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import BackEnd.Talib.DBConnection;
 
 public class GetPlaceByIdRepository {
+    public static class PlaceDetailRecord {
+        public final int placeID;
+        public final String name;
+        public final String location;
+        public final String description;
+        public final String popularityScore;
+        public final String recommendedDuration;
+        public final String priceRange;
+        public final String mustTryDishes;
 
-    public String getPlaceById(int placeID) throws Exception {
+        public PlaceDetailRecord(int placeID, String name, String location, String description, String popularityScore, String recommendedDuration, String priceRange, String mustTryDishes) {
+            this.placeID = placeID; this.name = name; this.location = location; this.description = description;
+            this.popularityScore = popularityScore; this.recommendedDuration = recommendedDuration;
+            this.priceRange = priceRange; this.mustTryDishes = mustTryDishes;
+        }
+    }
+
+    public PlaceDetailRecord getPlaceById(int placeID) throws Exception {
         String sql = "SELECT place.*, t.popularityScore, t.recommendedDuration, " +
                      "f.priceRange, f.mustTryDishes " +
                      "FROM place " +
@@ -21,24 +38,16 @@ public class GetPlaceByIdRepository {
             ps.setInt(1, placeID);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    StringBuilder json = new StringBuilder("{");
-                    json.append("\"placeID\":").append(rs.getInt("placeID")).append(",");
-                    json.append("\"name\":\"").append(rs.getString("name")).append("\",");
-                    json.append("\"location\":\"").append(rs.getString("location")).append("\",");
-                    json.append("\"description\":\"").append(rs.getString("description")).append("\"");
-
-                    String popScore = rs.getString("popularityScore");
-                    if (popScore != null) {
-                        json.append(",\"popularityScore\":").append(popScore).append(",");
-                        json.append("\"recommendedDuration\":\"").append(rs.getString("recommendedDuration")).append("\"");
-                    }
-                    String priceRange = rs.getString("priceRange");
-                    if (priceRange != null) {
-                        json.append(",\"priceRange\":\"").append(priceRange).append("\",");
-                        json.append("\"mustTryDishes\":\"").append(rs.getString("mustTryDishes")).append("\"");
-                    }
-                    json.append("}");
-                    return json.toString();
+                    return new PlaceDetailRecord(
+                        rs.getInt("placeID"),
+                        rs.getString("name"),
+                        rs.getString("city") + ", " + rs.getString("country"),
+                        "", 
+                        rs.getString("popularityScore"),
+                        rs.getString("recommendedDuration"),
+                        rs.getString("priceRange"),
+                        rs.getString("mustTryDishes")
+                    );
                 }
             }
         }
