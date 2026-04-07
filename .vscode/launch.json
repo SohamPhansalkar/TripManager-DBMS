@@ -8,6 +8,13 @@
       "type": "java",
       "name": "Main",
       "request": "launch",
+      "mainClass": "BackEnd.Soham.Main",
+      "projectName": "TripManager-DBMS_4e7fb222"
+    },
+    {
+      "type": "java",
+      "name": "Main",
+      "request": "launch",
       "mainClass": "Main",
       "projectName": "TripManager-DBMS_4e7fb222"
     },

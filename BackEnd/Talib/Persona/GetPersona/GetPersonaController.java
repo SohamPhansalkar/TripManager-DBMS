@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import BackEnd.Talib.Utils.InputValidator;
 import BackEnd.Talib.Persona.GetPersona.GetPersonaRepository.PersonaRecord;
 
 public class GetPersonaController implements HttpHandler {
@@ -20,6 +21,7 @@ public class GetPersonaController implements HttpHandler {
                 Map<String, String> params = parseJson(body);
 
                 String email = params.get("email");
+                if(email!=null) InputValidator.validateEmail(email);
                 if (email == null) {
                     sendResponse(exchange, "Missing email", 400); return;
                 }
@@ -37,8 +39,10 @@ public class GetPersonaController implements HttpHandler {
                 } else {
                     sendResponse(exchange, "Persona not found", 404);
                 }
+            } catch (IllegalArgumentException e) {
+                sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);
             } catch (Exception e) {
-                sendResponse(exchange, "Server error", 500);
+                sendResponse(exchange, "Server error: " + e.getMessage(), 500);
             }
         } else {
             sendResponse(exchange, "Method not allowed", 405);

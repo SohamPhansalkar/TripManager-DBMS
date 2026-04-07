@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import BackEnd.Talib.Utils.InputValidator;
 
 public class CreatePersonaController implements HttpHandler {
     private final CreatePersonaRepository repository = new CreatePersonaRepository();
@@ -19,21 +20,44 @@ public class CreatePersonaController implements HttpHandler {
                 Map<String, String> params = parseJson(body);
 
                 String email = params.get("email");
+                if(email!=null) InputValidator.validateEmail(email);
                 String type = params.get("personaType");
                 
-                String dietary = "foodie".equalsIgnoreCase(type) ? params.get("dietaryPreference") : null;
-                String bucketList = "explorer".equalsIgnoreCase(type) ? params.get("bucketList") : null;
-                String activities = "adventurer".equalsIgnoreCase(type) ? params.get("activities") : null;
-                String riskLevel = "adventurer".equalsIgnoreCase(type) ? params.get("riskLevel") : null;
+                String dietary = null;
+                String bucketList = null;
+                String activities = null;
+                String riskLevel = null;
+
+                if ("foodie".equalsIgnoreCase(type)) {
+                    dietary = params.get("dietaryPreference");
+                    if (dietary == null || dietary.isEmpty()) {
+                        throw new IllegalArgumentException("dietaryPreference is required for foodie type");
+                    }
+                } else if ("explorer".equalsIgnoreCase(type)) {
+                    bucketList = params.get("bucketList");
+                    if (bucketList == null || bucketList.isEmpty()) {
+                        throw new IllegalArgumentException("bucketList is required for explorer type");
+                    }
+                } else if ("adventurer".equalsIgnoreCase(type)) {
+                    activities = params.get("activities");
+                    riskLevel = params.get("riskLevel");
+                    if (activities == null || activities.isEmpty() || riskLevel == null || riskLevel.isEmpty()) {
+                        throw new IllegalArgumentException("activities and riskLevel are required for adventurer type");
+                    }
+                } else {
+                    throw new IllegalArgumentException("Invalid personaType: must be foodie, explorer, or adventurer");
+                }
 
                 if (email == null || type == null) {
-                    sendResponse(exchange, "Missing email or personaType", 400); return;
+                    throw new IllegalArgumentException("email and personaType are required");
                 }
 
                 repository.createPersona(email, type, dietary, bucketList, activities, riskLevel);
                 sendJsonResponse(exchange, "{\"message\": \"Persona created successfully\"}", 201);
+            } catch (IllegalArgumentException e) {
+                sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);
             } catch (Exception e) {
-                sendResponse(exchange, "Server error", 500);
+                sendResponse(exchange, "Server error: " + e.getMessage(), 500);
             }
         } else {
             sendResponse(exchange, "Method not allowed", 405);

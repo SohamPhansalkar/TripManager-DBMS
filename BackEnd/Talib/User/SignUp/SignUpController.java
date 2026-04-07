@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import BackEnd.Talib.Utils.InputValidator;
 
 public class SignUpController implements HttpHandler {
     private final SignUpRepository repository = new SignUpRepository();
@@ -19,10 +20,13 @@ public class SignUpController implements HttpHandler {
                 Map<String, String> params = parseJson(body);
 
                 String email = params.get("email");
+                if(email!=null) InputValidator.validateEmail(email);
                 String password = params.get("password");
+                if(password!=null) InputValidator.validatePassword(password);
                 String first_name = params.get("first_name");
                 String last_name = params.get("last_name");
                 String dob = params.get("dob");
+                if(dob!=null) InputValidator.validateDate(dob);
 
                 if (email == null || password == null || first_name == null || last_name == null || dob == null) {
                     sendResponse(exchange, "Fields missing", 400);
@@ -36,8 +40,11 @@ public class SignUpController implements HttpHandler {
                 } else {
                     sendResponse(exchange, "Unauthorized", 401);
                 }
+            } catch (IllegalArgumentException e) {
+                sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);
             } catch (Exception e) {
-                sendResponse(exchange, "Invalid request", 400);
+                e.printStackTrace();
+                sendResponse(exchange, "Server error", 500);
             }
         } else {
             sendResponse(exchange, "Method not allowed", 405);

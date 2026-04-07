@@ -5,6 +5,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import BackEnd.Talib.Utils.InputValidator;
 import java.util.List;
 import BackEnd.Talib.Places.GetAllPlaces.GetAllPlacesRepository.PlaceRecord;
 
@@ -26,8 +27,10 @@ public class GetAllPlacesController implements HttpHandler {
                 }
                 sb.append("]");
                 sendJsonResponse(exchange, sb.toString(), 200);
+            } catch (IllegalArgumentException e) {
+                sendResponse(exchange, "Validation Error: " + e.getMessage(), 400);
             } catch (Exception e) {
-                sendResponse(exchange, "Server error", 500);
+                sendResponse(exchange, "Server error: " + e.getMessage(), 500);
             }
         } else {
             sendResponse(exchange, "Method not allowed", 405);
