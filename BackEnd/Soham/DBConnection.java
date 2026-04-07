@@ -9,14 +9,6 @@ public class DBConnection {
         final String user = "root";
         final String pass = "root";
 
-        // static {
-        //     try {
-        //         Class.forName("com.mysql.cj.jdbc.Driver");
-        //     } catch (ClassNotFoundException e) {
-        //         throw new RuntimeException("MySQL Driver not found! Check your path.", e);
-        //     }
-        // }
-
         return DriverManager.getConnection(url, user, pass);
     }
     

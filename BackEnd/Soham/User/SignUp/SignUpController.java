@@ -24,11 +24,15 @@ public class SignUpController implements HttpHandler {
                 String  last_name = params.get("last_name");
                 String dob = params.get("dob");
 
-                if (email == null || password == null || first_name == null || last_name == null | dob == null) {
+                if (email == null || password == null || first_name == null || last_name == null || dob == null) {
                     sendResponse(exchange, "Fields missing", 400);
                     return;
                 }
 
+                if (!isEmailValid(email)) {
+                    sendResponse(exchange, "Invalid email", 400);
+                    return;
+                }
                 boolean success = service.verifySignUp(email, password, first_name, last_name, dob);
 
                 if (success) {
@@ -55,16 +59,30 @@ public class SignUpController implements HttpHandler {
         Map<String, String> result = new HashMap<>();
         json = json.trim();
         if (json.startsWith("{") && json.endsWith("}")) {
-            String[] pairs = json.substring(1, json.length() - 1).split(",");
+            String content = json.substring(1, json.length() - 1).trim();
+            String[] pairs = content.split(",");
             for (String pair : pairs) {
-                String[] keyValue = pair.split(":");
-                if (keyValue.length == 2) {
-                    String key = keyValue[0].trim().replace("\"", "");
-                    String value = keyValue[1].trim().replace("\"", "");
-                    result.put(key, value);
+                int colon = pair.indexOf(':');
+                if (colon <= 0) continue;
+                String key = pair.substring(0, colon).trim().replace("\"", "");
+                String value = pair.substring(colon + 1).trim();
+                if (value.startsWith("\"") && value.endsWith("\"")) {
+                    value = value.substring(1, value.length() - 1);
                 }
+                result.put(key, value);
             }
         }
         return result;
+    }
+
+    private boolean isEmailValid(String email) {
+        if (email == null) return false;
+        email = email.trim();
+        if (email.isEmpty()) return false;
+        int at = email.indexOf('@');
+        int dot = email.lastIndexOf('.');
+        if (at <= 0 || dot <= at + 1 || dot == email.length() - 1) return false;
+        if (email.contains(" ")) return false;
+        return true;
     }
 }

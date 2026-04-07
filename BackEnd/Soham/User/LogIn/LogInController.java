@@ -26,6 +26,11 @@ public class LogInController implements HttpHandler {
                     return;
                 }
 
+                if (!isEmailValid(email)) {
+                    sendResponse(exchange, "Invalid email", 400);
+                    return;
+                }
+
                 boolean success = service.verifyLogin(email, password);
 
                 if (success) {
@@ -39,6 +44,17 @@ public class LogInController implements HttpHandler {
         } else {
             sendResponse(exchange, "Method not allowed", 405);
         }
+    }
+
+    private boolean isEmailValid(String email) {
+        if (email == null) return false;
+        email = email.trim();
+        if (email.isEmpty()) return false;
+        int at = email.indexOf('@');
+        int dot = email.lastIndexOf('.');
+        if (at <= 0 || dot <= at + 1 || dot == email.length() - 1) return false;
+        if (email.contains(" ")) return false;
+        return true;
     }
 
     private void sendResponse(HttpExchange exchange, String response, int statusCode) throws IOException {
