@@ -18,3 +18,7 @@ create event (dayID, tripID, time, type, description, link)
 get event by eventID
 get event by dayID
 
+place 
+create place (eventID, name, placetype, seasonalAvailability, street, city, country)
+get places by eventID
+get place by placeID

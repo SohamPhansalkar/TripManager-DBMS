@@ -205,3 +205,64 @@ res body
     "link": "imagicaa.com"
 }
 200 OK
+
+
+/createplace POST
+params - eventID, name, placetype (enum), seasonalAvailability, street, city, country
+url - http://localhost:8080/createplace
+req body
+{
+    "eventID" : "17",
+    "name" : "imagicaa", 
+    "placetype" : "Tourist Spot", 
+    "seasonalAvailability" : "All", 
+    "street" : "Imagicaa, opposite hill view hotel", 
+    "city" : "lonavala", 
+    "country" : "India"
+}
+res body - 201 Created
+
+
+/getplacesbyeventid POST
+params - eventID
+url - http://localhost:8080/getplacesbyeventid
+req body
+{
+    "eventID" : "17"
+}
+res body 
+{
+    "places": [
+        {
+            "placeID": 6,
+            "placeID": 17,
+            "name": "imagicaa",
+            "placetype": "Tourist Spot",
+            "seasonalAvailability": "All",
+            "street": "Imagicaa",
+            "city": "lonavala",
+            "country": "India"
+        }
+    ]
+}
+200 OK
+
+/getplacebyplaceid POST
+params - placeID
+url - http://localhost:8080/getplacebyplaceid
+req body
+{
+    "placeID" : "6"
+}
+res body 
+{
+    "placeID": 6,
+    "eventID": 17,
+    "name": "imagicaa",
+    "placetype": "Tourist Spot",
+    "seasonalAvailability": "All",
+    "street": "\"Imagicaa",
+    "city": "lonavala",
+    "country": "India"
+}
+200 OK

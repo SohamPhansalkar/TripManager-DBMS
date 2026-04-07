@@ -6,6 +6,9 @@ import BackEnd.Soham.Day.GetDay.ByTripId.DayByTripIdController;
 import BackEnd.Soham.Event.CreateEvent.CreateEventController;
 import BackEnd.Soham.Event.GetEvent.ByDayId.EventByDayIdController;
 import BackEnd.Soham.Event.GetEvent.ByEventId.EventByEventIdController;
+import BackEnd.Soham.Place.CreatePlace.CreatePlaceController;
+import BackEnd.Soham.Place.GetPlace.ByEventId.PlaceByEventIdController;
+import BackEnd.Soham.Place.GetPlace.ByPlaceId.PlaceByPlaceIdController;
 import BackEnd.Soham.Trip.CreateTrip.CreateTripController;
 import BackEnd.Soham.Trip.GetTrip.ByEmail.TripByEmailController;
 import BackEnd.Soham.Trip.GetTrip.ById.TripByIdController;
@@ -41,6 +44,12 @@ public class Main {
         server.createContext("/geteventsbydayid", new EventByDayIdController());
 
         server.createContext("/geteventbyeventid", new EventByEventIdController());
+
+        server.createContext("/createplace", new CreatePlaceController());
+
+        server.createContext("/getplacesbyeventid", new PlaceByEventIdController());
+
+        server.createContext("/getplacebyplaceid", new PlaceByPlaceIdController());
 
         System.out.println("Server started on http://localhost:8080");
         server.start();
