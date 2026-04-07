@@ -5,7 +5,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import BackEnd.Talib.Utils.InputValidator;
 
 public class DeleteReviewController implements HttpHandler {
     private final DeleteReviewService service = new DeleteReviewService();

@@ -428,8 +428,8 @@ public class Dashboard extends JFrame {
     }
 
     private static class ExpenseItem {
-        String desc; double amount;
-        ExpenseItem(String d, double a) { this.desc = d; this.amount = a; }
+        double amount;
+        ExpenseItem(String d, double a) { this.amount = a; }
     }
 
     private void reorderDays() {

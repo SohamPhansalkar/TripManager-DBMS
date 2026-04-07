@@ -6,7 +6,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import BackEnd.Talib.Utils.InputValidator;
 import java.util.List;
 import BackEnd.Talib.Reviews.GetReviewsByPlace.GetReviewsByPlaceRepository.ReviewRecord;
 

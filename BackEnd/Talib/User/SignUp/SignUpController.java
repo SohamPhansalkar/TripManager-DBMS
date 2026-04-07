@@ -82,9 +82,4 @@ public class SignUpController implements HttpHandler {
         }
         return result;
     }
-
-    private String escape(String s) {
-        if (s == null) return "";
-        return s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n");
-    }
 }

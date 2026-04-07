@@ -5,7 +5,6 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import BackEnd.Talib.Utils.InputValidator;
 
 public class UpdatePersonaController implements HttpHandler {
     private final UpdatePersonaService service = new UpdatePersonaService();

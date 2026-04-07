@@ -3,9 +3,6 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import BackEnd.Talib.Utils.InputValidator;
 import java.util.List;
 import BackEnd.Talib.Places.GetAllPlaces.GetAllPlacesRepository.PlaceRecord;
 
@@ -50,23 +47,6 @@ public class GetAllPlacesController implements HttpHandler {
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(json.getBytes(StandardCharsets.UTF_8));
         }
-    }
-
-    private Map<String, String> parseJson(String json) {
-        Map<String, String> result = new HashMap<>();
-        json = json.trim();
-        if (json.startsWith("{") && json.endsWith("}")) {
-            String[] pairs = json.substring(1, json.length() - 1).split(",");
-            for (String pair : pairs) {
-                String[] keyValue = pair.split(":", 2);
-                if (keyValue.length == 2) {
-                    String key = keyValue[0].trim().replace("\"", "");
-                    String value = keyValue[1].trim().replace("\"", "");
-                    result.put(key, value);
-                }
-            }
-        }
-        return result;
     }
 
     private String escape(String s) {
