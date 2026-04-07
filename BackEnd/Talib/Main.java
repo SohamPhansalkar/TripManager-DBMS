@@ -20,7 +20,7 @@ import BackEnd.Talib.Persona.UpdatePersona.UpdatePersonaController;
 import BackEnd.Talib.Persona.DeletePersona.DeletePersonaController;
 public class Main {
     public static void main(String[] args) throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8081), 0);
 
         server.createContext("/places/all", new GetAllPlacesController());
         server.createContext("/places/", new GetPlaceByIdController());
@@ -39,7 +39,7 @@ public class Main {
         server.createContext("/persona/delete", new DeletePersonaController());
 
 
-        System.out.println("Server started on http://localhost:8080");
+        System.out.println("Server started on http://localhost:8081");
         server.start();
     }
 }
