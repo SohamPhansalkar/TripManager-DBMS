@@ -1,9 +1,5 @@
 package BackEnd.Soham.Place.CreatePlace;
 
-import java.util.*;
-import BackEnd.Soham.DBConnection;
-import BackEnd.Soham.Trip.TripEntity;
-
 public class CreatePlaceService {
     private final CreatePlaceRepository repository = new CreatePlaceRepository();
 

@@ -1,6 +1,6 @@
 package BackEnd.Talib.Reviews.GetReviewsByPlace;
 
-import java.util.*;
+import java.util.List;
 public class GetReviewsByPlaceService {
     private final GetReviewsByPlaceRepository repository = new GetReviewsByPlaceRepository();
 

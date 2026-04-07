@@ -1,8 +1,6 @@
 package BackEnd.Soham.Place.GetPlace.ByEventId;
 
-import java.util.*;
-import BackEnd.Soham.DBConnection;
-import BackEnd.Soham.Trip.TripEntity;
+import java.util.List;
 
 public class PlaceByEventIdService {
     private final PlaceByEventIdRepository repository = new PlaceByEventIdRepository();

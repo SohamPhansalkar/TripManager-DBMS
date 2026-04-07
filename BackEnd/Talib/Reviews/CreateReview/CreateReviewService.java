@@ -1,6 +1,4 @@
 package BackEnd.Talib.Reviews.CreateReview;
-
-import java.util.*;
 public class CreateReviewService {
     private final CreateReviewRepository repository = new CreateReviewRepository();
 

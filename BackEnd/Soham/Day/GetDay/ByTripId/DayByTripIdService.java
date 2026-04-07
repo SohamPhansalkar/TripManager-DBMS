@@ -1,8 +1,6 @@
 package BackEnd.Soham.Day.GetDay.ByTripId;
 
-import java.util.*;
-import BackEnd.Soham.DBConnection;
-import BackEnd.Soham.Trip.TripEntity;
+import java.util.List;
 
 public class DayByTripIdService {
     private final DayByTripIdRepository repository = new DayByTripIdRepository();

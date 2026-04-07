@@ -1,6 +1,4 @@
 package BackEnd.Talib.Persona.UpdatePersona;
-
-import java.util.*;
 public class UpdatePersonaService {
     private final UpdatePersonaRepository repository = new UpdatePersonaRepository();
 

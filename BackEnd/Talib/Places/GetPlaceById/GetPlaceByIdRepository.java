@@ -3,7 +3,6 @@ package BackEnd.Talib.Places.GetPlaceById;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import BackEnd.Talib.DBConnection;
 
 public class GetPlaceByIdRepository {

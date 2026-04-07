@@ -1,9 +1,5 @@
 package BackEnd.Soham.Event.CreateEvent;
 
-import java.util.*;
-import BackEnd.Soham.DBConnection;
-import BackEnd.Soham.Trip.TripEntity;
-
 public class CreateEventService {
     private final CreateEventRepository repository = new CreateEventRepository();
 

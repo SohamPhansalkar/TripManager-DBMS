@@ -1,7 +1,6 @@
 package BackEnd.Talib.Utils;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import BackEnd.Talib.DBConnection;
 
 // INHERITANCE: Base abstract class for DB repositories
@@ -22,6 +21,8 @@ public abstract class BaseRepository {
 
     // Custom Exception Handling Class
     public static class DatabaseException extends Exception {
+        private static final long serialVersionUID = 1L;
+
         public DatabaseException(String message, Throwable cause) {
             super(message, cause);
         }

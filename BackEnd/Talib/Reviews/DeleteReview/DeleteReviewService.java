@@ -1,6 +1,4 @@
 package BackEnd.Talib.Reviews.DeleteReview;
-
-import java.util.*;
 public class DeleteReviewService {
     private final DeleteReviewRepository repository = new DeleteReviewRepository();
 

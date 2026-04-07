@@ -1,6 +1,4 @@
 package BackEnd.Talib.Persona.DeletePersona;
-
-import java.util.*;
 public class DeletePersonaService {
     private final DeletePersonaRepository repository = new DeletePersonaRepository();
 

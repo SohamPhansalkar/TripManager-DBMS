@@ -1,6 +1,4 @@
 package BackEnd.Talib.Reviews.UpdateReview;
-
-import java.util.*;
 public class UpdateReviewService {
     private final UpdateReviewRepository repository = new UpdateReviewRepository();
 

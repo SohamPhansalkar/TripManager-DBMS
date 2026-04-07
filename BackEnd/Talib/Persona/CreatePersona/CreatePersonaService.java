@@ -1,6 +1,4 @@
 package BackEnd.Talib.Persona.CreatePersona;
-
-import java.util.*;
 public class CreatePersonaService {
     private final CreatePersonaRepository repository = new CreatePersonaRepository();
 

@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+@SuppressWarnings("deprecation")
 public class GlobalCLI {
     // Soham's backend (Winning conflicts)
     private static final String SOHAM_URL = "http://localhost:8080";
@@ -44,6 +45,7 @@ public class GlobalCLI {
                 case "8": 
                     System.out.println("Exiting Global CLI...");
                     System.exit(0);
+                    break;
                 default: System.out.println("Invalid option.");
             }
         }

@@ -1,6 +1,4 @@
 package BackEnd.Talib.User.LogIn;
-
-import java.util.*;
 public class LogInService {
     private final LogInRepository repository = new LogInRepository();
 
