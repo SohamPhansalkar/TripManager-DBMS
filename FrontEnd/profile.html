@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Trip Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header id="navbar-slot"></header>
+    <main>
+      <section class="section-wrap container">
+        <div class="logdiv">
+          <form id="profileForm">
+            <h3>Profile</h3>
+
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="first_name"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                name="last_name"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="emailInput" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="emailInput"
+                name="email"
+                aria-describedby="emailHelp"
+                required
+              />
+              <div id="emailHelp" class="form-text">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="dobInput" class="form-label">Date of birth</label>
+              <input
+                type="date"
+                class="form-control"
+                id="dobInput"
+                name="dob"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="passwordInput" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="passwordInput"
+                name="password"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmPasswordInput" class="form-label"
+                >Confirm password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="confirmPasswordInput"
+                name="confirm_password"
+              />
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" id="saveProfileBtn" class="btn btn-warning">
+                Save changes
+              </button>
+              <button
+                type="button"
+                id="deleteAccountBtn"
+                class="btn btn-danger"
+              >
+                Delete account
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer-slot"></footer>
+
+    <audio
+      id="bg-music"
+      src="background_italian_music.mp3"
+      loop
+      preload="auto"
+    ></audio>
+
+    <script src="script.js"></script>
+    <script>
+      // small client-side handlers for profile page
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("profileForm");
+        const deleteBtn = document.getElementById("deleteAccountBtn");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const pw = document.getElementById("passwordInput").value;
+          const pw2 = document.getElementById("confirmPasswordInput").value;
+          if (pw || pw2) {
+            if (pw !== pw2) {
+              alert("Passwords do not match. Please confirm your password.");
+              return;
+            }
+          }
+          // TODO: send updated profile to server
+          alert("Profile saved (client-only).");
+        });
+
+        deleteBtn.addEventListener("click", () => {
+          const ok = confirm(
+            "Are you sure you want to delete your account? This cannot be undone.",
+          );
+          if (!ok) return;
+          // TODO: call server to delete account
+          alert("Account deletion requested (client-only).");
+        });
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

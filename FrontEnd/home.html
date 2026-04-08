@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home — Trip Planner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header id="navbar-slot"></header>
+
+    <main>
+      <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <p class="hero-tag">Your Trips</p>
+          <h1>Planned journeys and upcoming adventures</h1>
+          <p class="hero-subtext">
+            Quickly view, edit, and open trip details. Create a new trip or
+            continue planning your next escape.
+          </p>
+        </div>
+      </section>
+
+      <section class="section-wrap container">
+        <div class="section-header">
+          <h2>Recent trips</h2>
+          <button id="musicToggle" class="music-toggle inline" aria-label="Toggle music" title="Toggle background music">♪</button>
+        </div>
+        <p class="section-intro">
+          A snapshot of your itineraries — click Details to view full plans.
+        </p>
+
+        <div class="trip-grid">
+          <article class="trip-card">
+            <img
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
+              alt="Goa beach"
+            />
+            <div class="card-copy">
+              <h3>Goa Escape</h3>
+              <p>08-04-2024 to 15-04-2024 · 20,000 INR · Beaches & nightlife</p>
+              <br /><button type="button" class="btn btn-primary">
+                Details
+              </button>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img
+              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80"
+              alt="Mountain trail"
+            />
+            <div class="card-copy">
+              <h3>Himachal Trek</h3>
+              <p>
+                05-05-2024 to 12-05-2024 · 18,500 INR · Mountain hikes &
+                viewpoints
+              </p>
+              <br /><button type="button" class="btn btn-primary">
+                Details
+              </button>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img
+              src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1400&q=80"
+              alt="City skyline"
+            />
+            <div class="card-copy">
+              <h3>Delhi Weekend</h3>
+              <p>
+                20-06-2024 to 22-06-2024 · 6,000 INR · Food tours & monuments
+              </p>
+              <br /><button type="button" class="btn btn-primary">
+                Details
+              </button>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img
+              src="https://images.unsplash.com/photo-1433838552652-f9a46b332c40?auto=format&fit=crop&w=1400&q=80"
+              alt="Road trip"
+            />
+            <div class="card-copy">
+              <h3>Coastal Road Trip</h3>
+              <p>
+                01-07-2024 to 07-07-2024 · 12,000 INR · Scenic drives & stops
+              </p>
+              <br /><button type="button" class="btn btn-primary">
+                Details
+              </button>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80"
+              alt="Cultural city"
+            />
+            <div class="card-copy">
+              <h3>Jaipur Heritage</h3>
+              <p>
+                15-08-2024 to 18-08-2024 · 8,500 INR · Palaces & local crafts
+              </p>
+              <br /><button type="button" class="btn btn-primary">
+                Details
+              </button>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img
+              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80"
+              alt="Island"
+            />
+            <div class="card-copy">
+              <h3>Andaman Retreat</h3>
+              <p>
+                10-09-2024 to 17-09-2024 · 34,000 INR · Snorkeling & relaxation
+              </p>
+              <br /><button type="button" class="btn btn-primary">
+                Details
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer id="footer-slot"></footer>
+
+    <audio id="bg-music" src="background_italian_music.mp3" loop preload="auto"></audio>
+
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
