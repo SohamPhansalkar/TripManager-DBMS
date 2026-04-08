@@ -39,7 +39,7 @@ res - 201 created
 
 
 /gettripbyid POST
-params - trpID
+params - tripID
 url - http://localhost:8080/gettripbyid
 req body - 
 {
