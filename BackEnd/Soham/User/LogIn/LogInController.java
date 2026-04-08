@@ -58,6 +58,7 @@ public class LogInController implements HttpHandler {
     }
 
     private void sendResponse(HttpExchange exchange, String response, int statusCode) throws IOException {
+        // Headers handled globally via Filter in Main.java
         exchange.sendResponseHeaders(statusCode, response.length());
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(response.getBytes());

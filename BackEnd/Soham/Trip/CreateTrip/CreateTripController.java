@@ -41,9 +41,9 @@ public class CreateTripController implements HttpHandler {
 
 				TripEntity trip = new TripEntity(creatorEmail, destination, budget, startDate, endDate);
 
-				boolean created = service.createTrip(trip);
-				if (created) {
-					sendResponse(exchange, "Trip Created", 201);
+				int tripID = service.createTrip(trip);
+				if (tripID > 0) {
+					sendResponse(exchange, String.valueOf(tripID), 201);
 				} else {
 					sendResponse(exchange, "Failed to create trip", 500);
 				}

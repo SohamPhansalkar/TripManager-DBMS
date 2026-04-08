@@ -8,12 +8,12 @@ import BackEnd.Soham.DBConnection;
 import BackEnd.Soham.Trip.TripEntity;
 
 public class CreateTripRepository {
-	public boolean saveTrip(TripEntity trip) {
+	public int saveTrip(TripEntity trip) {
 		String insert = "INSERT INTO trip (creatorEmail, destination, budget, startDate, endDate) VALUES (?, ?, ?, ?, ?)";
 		DBConnection DBC = new DBConnection();
 
 		try (Connection conn = DBC.DataBaseConnection();
-			 PreparedStatement stmt = conn.prepareStatement(insert)) {
+			 PreparedStatement stmt = conn.prepareStatement(insert, java.sql.Statement.RETURN_GENERATED_KEYS)) {
 
 			stmt.setString(1, trip.getCreatorEmail());
 			stmt.setString(2, trip.getDestination());
@@ -26,10 +26,17 @@ public class CreateTripRepository {
 			stmt.setString(5, trip.getEndDate());
 
 			int rows = stmt.executeUpdate();
-			return rows > 0;
+			if (rows > 0) {
+				try (java.sql.ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+					if (generatedKeys.next()) {
+						return generatedKeys.getInt(1);
+					}
+				}
+			}
+			return -1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return -1;
 		}
 	}
 }

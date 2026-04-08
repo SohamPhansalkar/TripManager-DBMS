@@ -56,10 +56,64 @@ document.addEventListener("DOMContentLoaded", async () => {
     injectSection("footer.html", "footer-slot", ".footer"),
   ]);
 
+  updateNavbarButton();
+  // Redirect to index.html if user not authenticated (unless on public pages)
+  enforceAuthRedirect();
+
   setupCardReveal();
   setupCreateTripButton();
   setupBackgroundMusic();
+  setupLoginForm();
+
+  if (typeof setupSignupForm === "function") {
+    setupSignupForm();
+  }
+
+  if (typeof fetchUserTrips === "function") {
+    fetchUserTrips();
+  }
+
+  if (typeof setupCreateTripUI === "function") {
+    setupCreateTripUI();
+  }
 });
+
+function updateNavbarButton() {
+  try {
+    const anchor = document.getElementById("navbar-btn");
+    if (!anchor) return;
+    const email = localStorage.getItem("userEmail");
+    const id = localStorage.getItem("userID");
+    const btn = anchor.querySelector("button");
+    if (email || id) {
+      anchor.setAttribute("href", "profile.html");
+      if (btn) btn.textContent = "Your Profile";
+    } else {
+      anchor.setAttribute("href", "login.html");
+      if (btn) btn.textContent = "Login";
+    }
+  } catch (e) {
+    console.error("updateNavbarButton error:", e);
+  }
+}
+
+function enforceAuthRedirect() {
+  try {
+    const email = localStorage.getItem("userEmail");
+    const id = localStorage.getItem("userID");
+    if (email || id) return; // authenticated
+
+    // allow public pages
+    const path = window.location.pathname.split("/").pop();
+    const publicPages = ["", "index.html", "login.html", "signup.html"];
+    if (publicPages.includes(path)) return;
+
+    // otherwise redirect to index
+    window.location.href = "index.html";
+  } catch (e) {
+    console.error("enforceAuthRedirect error:", e);
+  }
+}
 
 function setupBackgroundMusic() {
   const audio = document.getElementById("bg-music");

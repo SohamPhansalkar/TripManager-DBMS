@@ -22,25 +22,20 @@
     <header id="navbar-slot"></header>
 
     <main>
-      <section class="hero-section">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-          <p class="hero-tag">Your Trips</p>
-          <h1>Planned journeys and upcoming adventures</h1>
-          <p class="hero-subtext">
-            Quickly view, edit, and open trip details. Create a new trip or
-            continue planning your next escape.
-          </p>
-        </div>
-      </section>
-
       <section class="section-wrap container">
         <div class="section-header">
-          <h2>Recent trips</h2>
-          <button id="musicToggle" class="music-toggle inline" aria-label="Toggle music" title="Toggle background music">♪</button>
+          <h2>Your trips</h2>
+          <button
+            id="musicToggle"
+            class="music-toggle inline"
+            aria-label="Toggle music"
+            title="Toggle background music"
+          >
+            ♪
+          </button>
         </div>
         <p class="section-intro">
-          A snapshot of your itineraries — click Details to view full plans.
+          <button type="button" class="btn btn-info">New Trip +</button>
         </p>
 
         <div class="trip-grid">
@@ -140,11 +135,29 @@
           </article>
         </div>
       </section>
+
+      <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+          <p class="hero-tag">Your Trips</p>
+          <h1>Planned journeys and upcoming adventures</h1>
+          <p class="hero-subtext">
+            Quickly view, edit, and open trip details. Create a new trip or
+            continue planning your next escape.
+          </p>
+        </div>
+      </section>
     </main>
     <footer id="footer-slot"></footer>
 
-    <audio id="bg-music" src="background_italian_music.mp3" loop preload="auto"></audio>
+    <audio
+      id="bg-music"
+      src="background_italian_music.mp3"
+      loop
+      preload="auto"
+    ></audio>
 
+    <script src="api_calls.js"></script>
     <script src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

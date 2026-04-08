@@ -34,9 +34,9 @@ public class CreateDayController implements HttpHandler {
                     return;
                 }
 
-                boolean inserted = service.insertDay(tripID, date);
-                if (inserted) {
-                    sendResponse(exchange, "Day Created", 201);
+                int newDayID = service.insertDay(tripID, date);
+                if (newDayID > 0) {
+                    sendResponse(exchange, String.valueOf(newDayID), 201);
                 } else {
                     sendResponse(exchange, "Failed to create day", 500);
                 }
