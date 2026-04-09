@@ -266,3 +266,58 @@ res body
     "country": "India"
 }
 200 OK
+
+/getuserbyemail POST
+params - email
+url - http://localhost:8080/getuserbyemail
+req body - {"email": "a"}
+res body - {"email":"a", "password":"a", "firstName":"a", "lastName":"a", "dob":"2026-03-22"}
+200 OK
+
+/updateuser POST
+params - email, password, firstName, lastName, dob
+url - http://localhost:8080/updateuser
+req body - 
+{
+    "email": "a",
+    "password": "new_password",
+    "firstName": "new_first",
+    "lastName": "new_last",
+    "dob": "2000-01-01"
+}
+res body - Profile Updated
+200 OK
+
+/deleteuser POST
+params - email
+url - http://localhost:8080/deleteuser
+req body - {"email": "a"}
+res body - Account Deleted
+200 OK
+
+/viewtrip POST
+params - tripID
+url - http://localhost:8080/viewtrip
+req body - {"tripID" : "1"}
+res body{
+  "tripID": 1,
+  "creatorEmail": "a@example.com",
+  "destination": "Goa",
+  "budget": 20000,
+  "startDate": "2026-04-10",
+  "endDate": "2026-04-15",
+  "days": [
+    {
+      "dayID": 10,
+      "date": "2026-04-10",
+      "events": [
+        {
+          "eventID": 50,
+          "time": "10:00:00",
+          "type": "Transport",
+          "description": "Flight to Goa"
+        }
+      ]
+    }
+  ]
+}

@@ -12,6 +12,10 @@ import BackEnd.Soham.Place.GetPlace.ByPlaceId.PlaceByPlaceIdController;
 import BackEnd.Soham.Trip.CreateTrip.CreateTripController;
 import BackEnd.Soham.Trip.GetTrip.ByEmail.TripByEmailController;
 import BackEnd.Soham.Trip.GetTrip.ById.TripByIdController;
+import BackEnd.Soham.Trip.ViewTrip.ViewTripController;
+import BackEnd.Soham.User.DeleteUser.DeleteUserController;
+import BackEnd.Soham.User.GetUser.GetUserController;
+import BackEnd.Soham.User.UpdateUser.UpdateUserController;
 import BackEnd.Soham.User.LogIn.LogInController;
 import BackEnd.Soham.User.SignUp.SignUpController;
 
@@ -49,9 +53,13 @@ public class Main {
 
         addContextWithCors(server, "/login", new LogInController(), corsFilter);
         addContextWithCors(server, "/signup", new SignUpController(), corsFilter);
+        addContextWithCors(server, "/getuserbyemail", new GetUserController(), corsFilter);
+        addContextWithCors(server, "/updateuser", new UpdateUserController(), corsFilter);
+        addContextWithCors(server, "/deleteuser", new DeleteUserController(), corsFilter);
         addContextWithCors(server, "/createtrip", new CreateTripController(), corsFilter);
         addContextWithCors(server, "/gettripbyid", new TripByIdController(), corsFilter);
         addContextWithCors(server, "/gettripsbyemail", new TripByEmailController(), corsFilter);
+        addContextWithCors(server, "/viewtrip", new ViewTripController(), corsFilter);
         addContextWithCors(server, "/createday", new CreateDayController(), corsFilter);
         addContextWithCors(server, "/getdaybydayid", new DayByDayIDController(), corsFilter);
         addContextWithCors(server, "/getdaysbytripid", new DayByTripIdController(), corsFilter);

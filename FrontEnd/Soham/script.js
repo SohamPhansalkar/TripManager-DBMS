@@ -76,6 +76,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (typeof setupCreateTripUI === "function") {
     setupCreateTripUI();
   }
+
+  if (typeof setupViewTripUI === "function") {
+    setupViewTripUI();
+  }
+
+  if (typeof setupProfileUI === "function") {
+    setupProfileUI();
+  }
 });
 
 function updateNavbarButton() {

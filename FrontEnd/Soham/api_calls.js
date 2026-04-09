@@ -1,3 +1,47 @@
+async function setupProfileUI() {
+  const path = window.location.pathname.split("/").pop();
+  if (path !== "profile.html") return;
+
+  const email = localStorage.getItem("userEmail");
+  if (!email) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:8080/getuserbyemail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email }),
+    });
+
+    if (res.status === 200) {
+      const user = await res.json();
+      document.getElementById("firstName").value = user.firstName || "";
+      document.getElementById("lastName").value = user.lastName || "";
+      document.getElementById("emailInput").value = user.email || "";
+      document.getElementById("dobInput").value = user.dob || "";
+      document.getElementById("passwordInput").value = user.password || "";
+      document.getElementById("confirmPasswordInput").value =
+        user.password || "";
+    } else {
+      console.error("Failed to fetch user profile:", res.status);
+    }
+  } catch (err) {
+    console.error("Network error fetching profile:", err);
+  }
+}
+
+function setupLogout() {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("userEmail");
+      window.location.href = "login.html";
+    });
+  }
+}
+
 function setupLoginForm() {
   try {
     const form = document.querySelector(".logdiv form");
@@ -114,9 +158,9 @@ async function renderTrips(tripIDs) {
             <h3>${trip.destination}</h3>
             <p>${trip.startDate} to ${trip.endDate} · ${trip.budget} INR</p>
             <br />
-            <button type="button" class="btn btn-primary" value="${id}">
+            <a href="viewTrip.html?id=${id}" class="btn btn-primary">
               Details
-            </button>
+            </a>
           </div>
         `;
 
@@ -391,4 +435,85 @@ function setupCreateTripUI() {
 
   daysContainer.innerHTML = "";
   daysContainer.appendChild(createDayEl(0));
+}
+
+async function setupViewTripUI() {
+  const path = window.location.pathname.split("/").pop();
+  if (!path.startsWith("viewTrip.html")) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const tripID = urlParams.get("id");
+
+  if (!tripID) {
+    window.location.href = "home.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:8080/viewtrip", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tripID: tripID.toString() }),
+    });
+
+    if (res.status === 200) {
+      const trip = await res.json();
+
+      // Trip details
+      document.getElementById("viewDestination").textContent =
+        trip.destination + " Journey";
+      document.getElementById("dispDestination").textContent = trip.destination;
+      document.getElementById("dispBudget").textContent = trip.budget + " INR";
+      document.getElementById("dispStartDate").textContent = trip.startDate;
+      document.getElementById("dispEndDate").textContent = trip.endDate;
+
+      const container = document.getElementById("viewDaysContainer");
+      container.innerHTML = "";
+
+      if (trip.days && trip.days.length > 0) {
+        trip.days.forEach((day, index) => {
+          const dayDiv = document.createElement("div");
+          dayDiv.className =
+            "day-block border rounded-3 p-3 mb-4 bg-light shadow-sm";
+          dayDiv.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="mb-0">Day ${index + 1}</h5>
+              <span class="badge bg-primary">${day.date}</span>
+            </div>
+            <div class="events-list ms-md-4 mb-2">
+              ${
+                day.events && day.events.length > 0
+                  ? day.events
+                      .map(
+                        (event) => `
+                <div class="event-item bg-white border rounded-3 p-3 mb-2 shadow-xs">
+                  <div class="row g-2 align-items-center">
+                    <div class="col-md-2">
+                      <span class="fw-bold">${event.time}</span>
+                    </div>
+                    <div class="col-md-3">
+                      <span class="badge bg-info text-dark">${event.type}</span>
+                    </div>
+                    <div class="col-md-7">
+                      <p class="mb-0">${event.description}</p>
+                    </div>
+                  </div>
+                </div>
+              `,
+                      )
+                      .join("")
+                  : '<p class="text-muted small">No events planned for this day.</p>'
+              }
+            </div>
+          `;
+          container.appendChild(dayDiv);
+        });
+      }
+    } else {
+      window.alert("Failed to load trip details");
+    }
+  } catch (err) {
+    console.error(err);
+    window.alert("Error fetching trip data");
+  }
 }
