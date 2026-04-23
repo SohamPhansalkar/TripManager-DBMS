@@ -7,26 +7,22 @@ import BackEnd.Soham.DBConnection;
 public class SignUpRepository {
 
     public boolean signUpuser(String email, String password, String first_name, String last_name, String dob) {
-        String query = "{CALL SignUpUserProcedure(?, ?, ?, ?, ?)}";
+        String query = "{? = CALL SignUpFunction(?, ?, ?, ?, ?)}";
         DBConnection DBC = new DBConnection();
 
         try (Connection conn = DBC.DataBaseConnection();
              CallableStatement stmt = conn.prepareCall(query)) {
 
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            stmt.setString(3, first_name);
-            stmt.setString(4, last_name);
-            stmt.setString(5, dob);
+            stmt.registerOutParameter(1, Types.BOOLEAN);
+            stmt.setString(2, email);
+            stmt.setString(3, password);
+            stmt.setString(4, first_name);
+            stmt.setString(5, last_name); 
+            stmt.setString(6, dob);
 
-            int rowsAffected = stmt.executeUpdate();
+            stmt.execute();
+            return stmt.getBoolean(1);
 
-            if (rowsAffected > 0) {
-                return true;
-            } else {
-                System.out.println("User insertion failed: " + email + " (No rows affected)");
-                return false; 
-            }
         } catch (SQLIntegrityConstraintViolationException e) {
             System.err.println("User with email " + email + " already exists or constraint violation: " + e.getMessage());
             e.printStackTrace();

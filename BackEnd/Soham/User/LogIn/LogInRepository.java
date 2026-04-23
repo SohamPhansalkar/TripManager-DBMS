@@ -19,15 +19,15 @@ public class LogInRepository {
     // }
 
     public UserEntity findByEmail(String email) {
-        String query = "SELECT * FROM user WHERE email = ?";
+        String query = "{CALL LogInProcedure(?)}";
         DBConnection DBC = new DBConnection();
         
         try (Connection conn = DBC.DataBaseConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             CallableStatement stmt = conn.prepareCall(query)) {
             
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
-
+ 
             if (rs.next()) {
                 return new UserEntity(
                     rs.getString("email"),
