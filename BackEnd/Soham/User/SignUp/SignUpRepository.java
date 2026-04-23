@@ -7,11 +7,11 @@ import BackEnd.Soham.DBConnection;
 public class SignUpRepository {
 
     public boolean signUpuser(String email, String password, String first_name, String last_name, String dob) {
-        String query = "INSERT INTO user(email, password, first_name, last_name, dob) VALUES(?, ?, ?, ?, ?)";
+        String query = "{CALL SignUpUserProcedure(?, ?, ?, ?, ?)}";
         DBConnection DBC = new DBConnection();
 
         try (Connection conn = DBC.DataBaseConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             CallableStatement stmt = conn.prepareCall(query)) {
 
             stmt.setString(1, email);
             stmt.setString(2, password);
