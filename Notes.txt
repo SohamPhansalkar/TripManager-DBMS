@@ -38,6 +38,14 @@ req body -
 res - 201 created
 
 
+/gettripduration POST
+params - tripID
+url - http://localhost:8080/gettripduration
+req body - {"tripID" : "1"}
+res body - {"tripID": 1, "duration": 4}
+200 OK
+
+
 /gettripbyid POST
 params - tripID
 url - http://localhost:8080/gettripbyid
@@ -144,6 +152,13 @@ req body
 }
 res body 
 201 created
+
+/gettotalevents POST
+params - tripID
+url - http://localhost:8080/gettotalevents
+req body - {"tripID" : "1"}
+res body - {"tripID": 1, "totalEvents": 5}
+200 OK
 
 /geteventsbydayid POST
 params - dayID
